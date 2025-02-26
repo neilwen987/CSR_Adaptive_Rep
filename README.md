@@ -36,7 +36,7 @@ python inference/pretrained_embeddings.py \
       --eval_data_ffcv    /path/to/val.ffcv \
       --model_name "pre-trained visual backbone" \
 ```
-### Get CSR Embeddings for 1-NN retrieval
+### Get CSR Embeddings for 1-NN Evaluation
 ```bash
 python inference/csr_inference.py \
       --train_emb_path  /path/to/train_emb \
