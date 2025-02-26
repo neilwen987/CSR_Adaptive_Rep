@@ -11,21 +11,10 @@ from torchvision import transforms
 from torchvision.models import *
 from torchvision import datasets
 from tqdm import tqdm
-
 from argparse import ArgumentParser
 from utils import *
 from model_zoo import *
-
 from collections import OrderedDict
-from typing import List
-from ffcv.pipeline.operation import Operation
-from ffcv.loader import Loader, OrderOption
-from ffcv.transforms import ToTensor, ToDevice, Squeeze, NormalizeImage, \
-    RandomHorizontalFlip, ToTorchImage
-from ffcv.fields.rgb_image import CenterCropRGBImageDecoder, \
-    RandomResizedCropRGBImageDecoder
-from ffcv.fields.basics import IntDecoder
-
 
 parser=ArgumentParser()
 
@@ -42,6 +31,7 @@ parser.add_argument('--embed_save_path', default='../retrieval/pretrained_emb', 
 parser.add_argument('--model_name', default='resnet50d.ra4_e3600_r224_in1k',help='timm model name')
 parser.add_argument('--backbone_ckpt', default='/mnt/b6358dbf-93d5-42d7-adee-9793f027e744/WTS/Matryoshka_NCL/'
                                                'examples-main/imagenet/resnet_sota_pretrain/pytorch_model.bin',help='timm model ckpt')
+
 
 # CSR args
 parser.add_argument('--topk', default=8, type=int,help='the number of topk')
