@@ -2,13 +2,14 @@ import numpy as np
 import faiss
 import time
 import pandas as pd
+from argparse import ArgumentParser
 from os import path, makedirs
 
+parser=ArgumentParser()
+parser.add_argument('--topk', default=8, type=int,help='the number of topk')
+args = parser.parse_args()
 
-ngpus = faiss.get_num_gpus()
-print("number of GPUs:", ngpus)
-
-topk = 8
+topk = args.topk
 root = f'./CSR_topk_{topk}/'
 dataset = 'V1'
 index_type = 'exactl2'
@@ -16,6 +17,9 @@ k = 2048 # shortlist length, default set to max supported by FAISS
 
 db_csv = f'{dataset}_train_topk_{topk}'+ '-X.npy'
 query_csv = f'{dataset}_val_topk_{topk}'+ '-X.npy'
+
+ngpus = faiss.get_num_gpus()
+print("number of GPUs:", ngpus)
 
 start = time.time()
 database = np.load(root+db_csv)

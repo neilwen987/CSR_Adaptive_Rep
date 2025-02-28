@@ -46,3 +46,14 @@ python inference/csr_inference.py \
       --hidden-size 8192  #"By default, 4 * visual backbone embedding size"
       --cse_ckpt "CSR ckpt path"\
 ```
+
+### Get Evaluation Results
+We use [FAISS](https://github.com/facebookresearch/faiss) for KNN evaluation and calculate Top1 Accuracy under different sparsity conditions.
+Note that we follow the pipeline of [MRL](https://github.com/RAIVNLab/MRL/tree/main/retrieval) for fair comparision.
+```bash
+cd retrieval
+# Get FAISS index
+python faiss_nn.py --topk 8
+# Evaluate Top1 accuracy
+python compute_metrics.py --topk 8
+```

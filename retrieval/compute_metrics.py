@@ -2,9 +2,12 @@ import pandas as pd
 import numpy as np
 import time
 import os
+from argparse import ArgumentParser
 
-
-topk = 8
+parser=ArgumentParser()
+parser.add_argument('--topk', default=8, type=int,help='the number of topk')
+args = parser.parse_args()
+topk = args.topk
 root = f"./CSR_topk_{topk}/"
 dataset = 'V1'
 index_type = 'exactl2' # ['exactl2', 'hnsw_8', 'hnsw_32']
