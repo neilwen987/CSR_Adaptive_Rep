@@ -38,14 +38,15 @@ parser.add_argument('--topk', default=8, type=int,help='the number of topk')
 parser.add_argument('--auxk', default=512, type=int,help='the number of auxk')
 parser.add_argument('--auxk_coef', default=1/32, type=float,help='auxk_coef')
 parser.add_argument('--dead_threshold', default=10, type=int,help='dead_threshold')
-parser.add_argument('--hidden-size', default=8192, type=int,help='the size of hidden layer')
+parser.add_argument('--hidden-size', default=None, type=int,help='the size of hidden layer')
 parser.add_argument('--csr-ckpt', default='/mnt/b6358dbf-93d5-42d7-adee-9793f027e744/WTS/Matryoshka_NCL/examples-main/'
                                           'pz_sae_multi_topk/ckpt/zlcq1r9g_best_cl_full/checkpoint_9.pth',type=str,help = 'ckpt for CSR model')
 
 args = parser.parse_args()
 
 sota_backbone = timm.create_model(args.model_name, pretrained=False, num_classes=1000,)
-args.hidden_size = sota_backbone.fc.in_features * 4
+if args.hidden_size is None:
+    args.hidden_size = sota_backbone.fc.in_features * 4
 model = CSR(n_latents=args.hidden_size, topk=args.topk, auxk=args.auxk, dead_threshold=args.dead_threshold,
             normalize=False, n_inputs=sota_backbone.fc.in_features, pre_trained_backbone=sota_backbone)
 

@@ -38,12 +38,10 @@ parser.add_argument('--workers', type=int, default=16, help='num workers for dat
 parser.add_argument('--batch_size', default=256,type=int,help='batch size')
 parser.add_argument('--embed_save_path', default='../retrieval/pretrained_emb', help='path to save database and query arrays for retrieval', type=str)
 parser.add_argument('--model_name', default='resnet50d.ra4_e3600_r224_in1k',help='timm model name')
-parser.add_argument('--backbone_ckpt', default='/mnt/b6358dbf-93d5-42d7-adee-9793f027e744/WTS/Matryoshka_NCL/'
-                                               'examples-main/imagenet/resnet_sota_pretrain/pytorch_model.bin',help='timm model ckpt')
 
 args = parser.parse_args()
 
-model = timm.create_model(args.model_name, pretrained=False, num_classes=1000,)
+model = timm.create_model(args.model_name, pretrained=True, num_classes=1000,)
 state_dict = torch.load(args.backbone_ckpt, map_location='cpu')
 model.load_state_dict(state_dict)
 model.cuda()
