@@ -12,7 +12,14 @@ import math
 import numpy as np
 
 from tqdm import tqdm
+import logging
+import math
+import os
+from typing import Dict, List, Optional, Tuple
 
+import numpy as np
+import torch
+import torch.distributed as dist
 
 
 '''
@@ -136,3 +143,48 @@ def generate_pretrained_embed(model, data_loader, emb_path,):
 	fwd_pass_y_list = []
 
 
+def stack_emb(root_path='./retrieval/pretrained_emb/train_emb'):
+	data_list =[]
+	img_path = os.path.join(root_path,'img')
+	label_path = os.path.join(root_path,'label')
+	for file in tqdm(os.listdir(img_path)):
+		data = np.load(os.path.join(img_path,file))
+		data_list.append(data)
+	data_stack = np.concatenate(data_list,axis=0)
+	np.save('imgenet1k_train_emb.npy',data_stack)
+
+
+def get_rank():
+    if dist.is_available() and dist.is_initialized():
+        return dist.get_rank()
+    return 0
+
+
+class GatherLayer(torch.autograd.Function):
+    """
+    Gathers tensors from all process and supports backward propagation
+    for the gradients across processes.
+    """
+
+    @staticmethod
+    def forward(ctx, x):
+        if dist.is_available() and dist.is_initialized():
+            output = [torch.zeros_like(x) for _ in range(dist.get_world_size())]
+            dist.all_gather(output, x)
+        else:
+            output = [x]
+        return tuple(output)
+
+    @staticmethod
+    def backward(ctx, *grads):
+        if dist.is_available() and dist.is_initialized():
+            all_gradients = torch.stack(grads)
+            dist.all_reduce(all_gradients)
+            grad_out = all_gradients[get_rank()]
+        else:
+            grad_out = grads[0]
+        return grad_out
+
+def gather(X, dim=0):
+    """Gathers tensors from all processes, supporting backward propagation."""
+    return torch.cat(GatherLayer.apply(X), dim=dim)
