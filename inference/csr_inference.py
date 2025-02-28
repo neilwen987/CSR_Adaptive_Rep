@@ -21,7 +21,7 @@ parser=ArgumentParser()
 # model args
 parser.add_argument('--train_emb_path', default='../retrieval/pretrained_emb/train_emb',
                     help='path to pre-trained training embeddings (default: imagenet)')
-parser.add_argument('--eval_emb_path', default='../retrieval/pretrained_emb/val_emb)',
+parser.add_argument('--eval_emb_path', default='../retrieval/pretrained_emb/val_emb',
                     help='path to pre-trained evaluation embeddings (default: imagenet)')
 parser.add_argument('--retrieval_array_path', default='../retrieval',
                     help='path to save database and query arrays for retrieval', type=str)
