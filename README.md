@@ -36,6 +36,21 @@ python inference/pretrained_embeddings.py \
       --eval_data_ffcv    /path/to/val.ffcv \
       --model_name "pre-trained visual backbone" \
 ```
+
+### Train Contrastvie Sparse Representation on Imagenet1K
+```bash
+python main.py \
+      --pretrained_emb /path/to/pretrained_emb \
+      --model_name "pre-trained visual backbone" \
+      --use_ddp False \     #set True if you want to use multi-GPU
+      --gpu 1\              # GPU ID, set None if you use multi-GPU
+      --batch-size 1024 * 4 \
+      --lr 4e-4 \
+      --use_CL True \       #whether to use contrastive learning
+      --topk 8 \            #topk for CSR
+      --auxk 512 \          #auxiliary sparse code size
+      --hidden-size 8192 \  #"By default, 4 * visual backbone embedding size"   
+```
 ### Get CSR Embeddings for 1-NN Evaluation
 ```bash
 python inference/csr_inference.py \
