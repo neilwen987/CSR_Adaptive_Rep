@@ -39,15 +39,10 @@ model_names = sorted(name for name in models.__dict__
 
 parser = argparse.ArgumentParser(description='PyTorch ImageNet Training')
 parser.add_argument('--pretrained_emb', metavar='DIR', nargs='?',
-                    default='/mnt/b6358dbf-93d5-42d7-adee-9793f027e744/WTS/Matryoshka_NCL/'
-                            'examples-main/pz_sae_multi_topk/inference_emb/imgenet1k_emb.npy',
-                    #'./imgenet1k_train_emb.npy',
+                    default='./imgenet1k_train_emb.npy',
                     help='path to pre-trained embeddings dataset (default: imagenet)')
 parser.add_argument('--dummy', default=False, type=bool, help='whether to use dumy datasets')
 parser.add_argument('--model_name', default='resnet50d.ra4_e3600_r224_in1k', help='timm model name')
-parser.add_argument('--backbone_ckpt', default='/mnt/b6358dbf-93d5-42d7-adee-9793f027e744/WTS/Matryoshka_NCL/'
-                                               'examples-main/imagenet/resnet_sota_pretrain/pytorch_model.bin', type=str,
-                    help='pretrained backbone_path', )
 
 parser.add_argument('-j', '--workers', default=32, type=int, metavar='N',
                     help='number of data loading workers (default: 4)')
@@ -172,7 +167,7 @@ def main_worker(gpu, ngpus_per_node, args):
     # create model
     print("=> Creating CSR model, use pre-trained model '{}'".format(args.model_name))
     # Loading without the fc layer
-    sota_backbone = timm.create_model(args.model_name, pretrained=False, num_classes=1000, )
+    sota_backbone = timm.create_model(args.model_name, pretrained=True, num_classes=1000, )
     state_dict = torch.load(args.backbone_ckpt, map_location='cpu')
     sota_backbone.load_state_dict(state_dict)
 
