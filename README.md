@@ -1,5 +1,8 @@
 #  Beyond Matryoshka: Revisiting Sparse Coding for Adaptive Representation
-Official Code for Paper: **Beyond Matryoshka: Revisiting Sparse Coding for Adaptive Representation**
+By [Tiansheng Wen\*](https://scholar.google.com.hk/citations?user=mrdyOyQAAAAJ&hl=zh-CN), [Yifei Wang\*](https://yifeiwang77.com/), [Zequn Zeng](https://joeyz0z.github.io/), Zhong Peng, Yudi Su, [Xinyang Liu](https://xinyangatk.github.io/),
+[Bo Chen](https://web.xidian.edu.cn/bchen/), Hongwei Liu, [Stefanie Jegelka](https://people.csail.mit.edu/stefje/) and [Chenyu You](https://chenyuyou.me/)
+
+<a href=''><img alt="Static Badge" src="https://img.shields.io/badge/Paper-arXiv-red"></a>
 
 ![Overview](./assets/overview.jpg)
 
