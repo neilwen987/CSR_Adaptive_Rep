@@ -1,6 +1,7 @@
-# <span style="color:rgb(135, 206, 235)">C</span>ontrastive <span style="color:rgb(135, 206, 235)">S</span>parse <span style="color:rgb(135, 206, 235)">R</span>epresentation Learning
+#  Beyond Matryoshka: Revisiting Sparse Coding for Adaptive Representation
 Official Code for Paper: **Beyond Matryoshka: Revisiting Sparse Coding for Adaptive Representation**
 
+In this paper, we show that \emph{sparse coding} offers a compelling alternative for achieving adaptive representation with minimal overhead and higher fidelity. We propose **C**ontrastive **S**parse **R**epresentation , a method that sparsifies pre-trained embeddings into a high-dimensional but *selectively activated* feature space. By leveraging lightweight autoencoding and task-aware contrastive objectives, CSR preserves semantic quality while allowing flexible, cost-effective inference at different sparsity levels. Extensive experiments on image, text, and multimodal benchmarks demonstrate that CSR consistently outperforms MRL in terms of both accuracy and retrieval speed-often by large margins-while also cutting training time to a fraction of that required by MRL. Our results establish sparse coding as a powerful paradigm for adaptive representation learning in real-world applications where efficiency and fidelity are both paramount.
 
 In this repo, we will release (**updating**):
 
