@@ -8,7 +8,6 @@ In this repo, we will release (**updating**):
 - Checkpoints &#x1F4CC;
 - Reproducing Experiments &#x2705;
   - Dataset preparations &#x2705;
-  - Configurations 
   - Training &#x2705;
   - Evaluation &#x2705;
 
@@ -81,3 +80,5 @@ python faiss_nn.py --topk 8
 # Evaluate Top1 accuracy
 python compute_metrics.py --topk 8
 ```
+### Acknowledgements
+This repository was built off of [Sparse_AutoEncoder](https://github.com/openai/sparse_autoencoder), [Torchvision](https://github.com/pytorch/vision).
