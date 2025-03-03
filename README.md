@@ -2,6 +2,15 @@
 Official Code for Paper: **Beyond Matryoshka: Revisiting Sparse Coding for Adaptive Representation**
 
 
+In this repo, we will release (**updating**):
+
+- Environment Dependencies &#x2705;
+- Checkpoints &#x1F4CC;
+- Reproducing Experiments &#x2705;
+  - Dataset preparations &#x2705;
+  - Configurations 
+  - Training &#x2705;
+  - Evaluation &#x2705;
 
 ## Set Up
 Pip install the requirements file in this directory. Note that a python3 distribution is required:
