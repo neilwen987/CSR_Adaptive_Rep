@@ -1,6 +1,8 @@
 #  Beyond Matryoshka: Revisiting Sparse Coding for Adaptive Representation
 Official Code for Paper: **Beyond Matryoshka: Revisiting Sparse Coding for Adaptive Representation**
 
+![Overview](./assets/overview.jpg)
+
 In this paper, we show that *sparse coding* offers a compelling alternative for achieving adaptive representation with minimal overhead and higher fidelity. We propose **C**ontrastive **S**parse **R**epresentation, a method that sparsifies pre-trained embeddings into a high-dimensional but *selectively activated* feature space. By leveraging lightweight autoencoding and task-aware contrastive objectives, CSR preserves semantic quality while allowing flexible, cost-effective inference at different sparsity levels. Extensive experiments on image, text, and multimodal benchmarks demonstrate that CSR consistently outperforms MRL in terms of both accuracy and retrieval speed-often by large margins-while also cutting training time to a fraction of that required by MRL. Our results establish sparse coding as a powerful paradigm for adaptive representation learning in real-world applications where efficiency and fidelity are both paramount.
 
 In this repo, we will release (**updating**):
@@ -60,7 +62,7 @@ python main.py \
       --auxk 512 \          # auxiliary sparse code size
       --hidden-size 8192 \  # By default, 4 * visual backbone embedding size
 ```
-### Get CSR Embeddings for 1-NN Evaluation
+### Get CSR Embeddings for Evaluation
 ```bash
 python inference/csr_inference.py \
       --train_emb_path  /path/to/train_emb \
@@ -83,3 +85,6 @@ python compute_metrics.py --topk 8
 ```
 ### Acknowledgements
 This repository was built off of [Sparse_AutoEncoder](https://github.com/openai/sparse_autoencoder), [Torchvision](https://github.com/pytorch/vision).
+
+### Citation
+If you find this repository useful, please cite our paper:
