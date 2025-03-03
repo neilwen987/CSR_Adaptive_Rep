@@ -1,7 +1,7 @@
 #  Beyond Matryoshka: Revisiting Sparse Coding for Adaptive Representation
 Official Code for Paper: **Beyond Matryoshka: Revisiting Sparse Coding for Adaptive Representation**
 
-In this paper, we show that *sparse coding* offers a compelling alternative for achieving adaptive representation with minimal overhead and higher fidelity. We propose **C**ontrastive **S**parse **R**epresentation , a method that sparsifies pre-trained embeddings into a high-dimensional but *selectively activated* feature space. By leveraging lightweight autoencoding and task-aware contrastive objectives, CSR preserves semantic quality while allowing flexible, cost-effective inference at different sparsity levels. Extensive experiments on image, text, and multimodal benchmarks demonstrate that CSR consistently outperforms MRL in terms of both accuracy and retrieval speed-often by large margins-while also cutting training time to a fraction of that required by MRL. Our results establish sparse coding as a powerful paradigm for adaptive representation learning in real-world applications where efficiency and fidelity are both paramount.
+In this paper, we show that *sparse coding* offers a compelling alternative for achieving adaptive representation with minimal overhead and higher fidelity. We propose **C**ontrastive **S**parse **R**epresentation, a method that sparsifies pre-trained embeddings into a high-dimensional but *selectively activated* feature space. By leveraging lightweight autoencoding and task-aware contrastive objectives, CSR preserves semantic quality while allowing flexible, cost-effective inference at different sparsity levels. Extensive experiments on image, text, and multimodal benchmarks demonstrate that CSR consistently outperforms MRL in terms of both accuracy and retrieval speed-often by large margins-while also cutting training time to a fraction of that required by MRL. Our results establish sparse coding as a powerful paradigm for adaptive representation learning in real-world applications where efficiency and fidelity are both paramount.
 
 In this repo, we will release (**updating**):
 
@@ -51,14 +51,14 @@ python inference/pretrained_embeddings.py \
 python main.py \
       --pretrained_emb /path/to/pretrained_emb \
       --model_name "pre-trained visual backbone" \
-      --use_ddp False \     #set True if you want to use multi-GPU
+      --use_ddp False \     # set True if you want to use multi-GPU
       --gpu 1\              # GPU ID, set None if you use multi-GPU
       --batch-size 1024 * 4 \
       --lr 4e-4 \
-      --use_CL True \       #whether to use contrastive learning
-      --topk 8 \            #topk for CSR
-      --auxk 512 \          #auxiliary sparse code size
-      --hidden-size 8192 \  #"By default, 4 * visual backbone embedding size"   
+      --use_CL True \       # whether to use contrastive learning
+      --topk 8 \            # topk for CSR
+      --auxk 512 \          # auxiliary sparse code size
+      --hidden-size 8192 \  # By default, 4 * visual backbone embedding size
 ```
 ### Get CSR Embeddings for 1-NN Evaluation
 ```bash
@@ -67,13 +67,13 @@ python inference/csr_inference.py \
       --eval_emb_path    /path/to/val_emb \
       --model_name "pre-trained visual backbone" \
       --topk 8\
-      --hidden-size 8192  #"By default, 4 * visual backbone embedding size"
+      --hidden-size 8192  # By default, 4 * visual backbone embedding size
       --cse_ckpt "CSR ckpt path"\
 ```
 
 ### Get Evaluation Results
 We use [FAISS](https://github.com/facebookresearch/faiss) for KNN evaluation and calculate Top1 Accuracy under different sparsity conditions.
-Note that we follow the pipeline of [MRL](https://github.com/RAIVNLab/MRL/tree/main/retrieval) for fair comparision.
+Note that we follow the pipeline of [MRL](https://github.com/RAIVNLab/MRL/tree/main/retrieval) for fair comparison.
 ```bash
 cd retrieval
 # Get FAISS index
