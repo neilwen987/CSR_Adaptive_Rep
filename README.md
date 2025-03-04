@@ -89,6 +89,5 @@ python compute_metrics.py --topk 8
 ### Acknowledgements
 This repository was built off of [Sparse_AutoEncoder](https://github.com/openai/sparse_autoencoder), [Torchvision](https://github.com/pytorch/vision).
 
-### Citing this work:
-If you find the work useful, please cite the accompanying paper:
+
 
