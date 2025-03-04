@@ -86,8 +86,20 @@ python faiss_nn.py --topk 8
 # Evaluate Top1 accuracy
 python compute_metrics.py --topk 8
 ```
+### Citing this paper
+If you find this work useful, please cite the accompanying paper:
+```
+@misc{wen2025matryoshkarevisitingsparsecoding,
+      title={Beyond Matryoshka: Revisiting Sparse Coding for Adaptive Representation}, 
+      author={Tiansheng Wen and Yifei Wang and Zequn Zeng and Zhong Peng and Yudi Su and Xinyang Liu and Bo Chen and Hongwei Liu and Stefanie Jegelka and Chenyu You},
+      year={2025},
+      eprint={2503.01776},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2503.01776}, 
+}
+```
 ### Acknowledgements
 This repository was built off of [Sparse_AutoEncoder](https://github.com/openai/sparse_autoencoder), [Torchvision](https://github.com/pytorch/vision).
-
 
 
