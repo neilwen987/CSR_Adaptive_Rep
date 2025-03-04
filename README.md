@@ -1,8 +1,8 @@
-#  Beyond Matryoshka: Revisiting Sparse Coding for Adaptive Representation
+#  [Beyond Matryoshka: Revisiting Sparse Coding for Adaptive Representation](http://arxiv.org/abs/2503.01776)
 By [Tiansheng Wen\*](https://scholar.google.com.hk/citations?user=mrdyOyQAAAAJ&hl=zh-CN), [Yifei Wang\*](https://yifeiwang77.com/), [Zequn Zeng](https://joeyz0z.github.io/), Zhong Peng, Yudi Su, [Xinyang Liu](https://xinyangatk.github.io/),
 [Bo Chen](https://web.xidian.edu.cn/bchen/), Hongwei Liu, [Stefanie Jegelka](https://people.csail.mit.edu/stefje/) and [Chenyu You](https://chenyuyou.me/)
 
-<a href=''><img alt="Static Badge" src="https://img.shields.io/badge/Paper-arXiv-red"></a>
+<a href='https://arxiv.org/abs/2503.01776'><img alt="Static Badge" src="https://img.shields.io/badge/Paper-arXiv-red"></a>
 
 ![Overview](./assets/overview.jpg)
 
@@ -88,4 +88,7 @@ python compute_metrics.py --topk 8
 ```
 ### Acknowledgements
 This repository was built off of [Sparse_AutoEncoder](https://github.com/openai/sparse_autoencoder), [Torchvision](https://github.com/pytorch/vision).
+
+### Citing this work:
+If you find the work useful, please cite the accompanying paper:
 
