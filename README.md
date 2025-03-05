@@ -12,10 +12,14 @@ In this repo, we will release (**updating**):
 
 - Environment Dependencies &#x2705;
 - Checkpoints &#x1F4CC;
+  - Visual ckpt (on ImageNet)&#x1F4CC;
+  - Text ckpt (on partly MTEB datasets) &#x1F4CC;
+  - MutilModel ckpt (on MS COCO)&#x1F4CC;
 - Reproducing Experiments &#x2705;
   - Dataset preparations &#x2705;
   - Training &#x2705;
   - Evaluation &#x2705;
+  - Retrieval Time Evaluation &#x1F4CC;
 
 ## Set Up
 Pip install the requirements file in this directory. Note that a python3 distribution is required:
