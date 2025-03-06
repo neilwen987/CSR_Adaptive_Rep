@@ -54,6 +54,11 @@ python inference/pretrained_embeddings.py \
       --eval_data_ffcv    /path/to/val.ffcv \
       --model_name "pre-trained visual backbone" \
 ```
+Then stack embeds together:
+```bash
+python stack_emb.py
+```
+FYI : I did this only because memory constrain on my computer, otherwise you can directly infer the entire training embeds without stack operation.
 
 ### Train Contrastvie Sparse Representation on Imagenet1K
 ```bash
