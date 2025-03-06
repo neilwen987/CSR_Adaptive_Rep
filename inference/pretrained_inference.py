@@ -40,8 +40,6 @@ parser.add_argument('--model_name', default='resnet50d.ra4_e3600_r224_in1k',help
 args = parser.parse_args()
 
 model = timm.create_model(args.model_name, pretrained=True, num_classes=1000,)
-state_dict = torch.load(args.backbone_ckpt, map_location='cpu')
-model.load_state_dict(state_dict)
 model.cuda()
 model.eval()
 
