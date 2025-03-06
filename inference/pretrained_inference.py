@@ -28,11 +28,9 @@ from ffcv.fields.basics import IntDecoder
 parser=ArgumentParser()
 
 # model args
-parser.add_argument('--train_data_ffcv', default='/mnt/b6358dbf-93d5-42d7-adee-9793f027e744/WTS/Matryoshka_NCL/examples-main/'
-                         'imagenet/ffcv_imagenet/train_500_0.50_90.ffcv',
+parser.add_argument('--train_data_ffcv', default=None,
                     help='path to training dataset (default: imagenet)')
-parser.add_argument('--eval_data_ffcv', default='/mnt/b6358dbf-93d5-42d7-adee-9793f027e744/WTS/Matryoshka_NCL/examples-main/'
-                         'imagenet/ffcv_imagenet/val_500_0.50_90.ffcv',
+parser.add_argument('--eval_data_ffcv', default=None,
                     help='path to evaluation dataset (default: imagenet)')
 parser.add_argument('--workers', type=int, default=16, help='num workers for dataloader')
 parser.add_argument('--batch_size', default=256,type=int,help='batch size')
