@@ -1,5 +1,5 @@
 #  [Beyond Matryoshka: Revisiting Sparse Coding for Adaptive Representation](http://arxiv.org/abs/2503.01776)
-By [Tiansheng Wen\*](https://scholar.google.com.hk/citations?user=mrdyOyQAAAAJ&hl=zh-CN), [Yifei Wang\*](https://yifeiwang77.com/), [Zequn Zeng](https://joeyz0z.github.io/), Zhong Peng, Yudi Su, [Xinyang Liu](https://xinyangatk.github.io/),
+By [Tiansheng Wen\*](https://neilwen987.github.io/), [Yifei Wang\*](https://yifeiwang77.com/), [Zequn Zeng](https://joeyz0z.github.io/), Zhong Peng, Yudi Su, [Xinyang Liu](https://xinyangatk.github.io/),
 [Bo Chen](https://web.xidian.edu.cn/bchen/), Hongwei Liu, [Stefanie Jegelka](https://people.csail.mit.edu/stefje/) and [Chenyu You](https://chenyuyou.me/)
 
 <a href='https://arxiv.org/abs/2503.01776'><img alt="Static Badge" src="https://img.shields.io/badge/Paper-arXiv-red"></a>
@@ -82,7 +82,7 @@ python inference/csr_inference.py \
 
 ### Get Evaluation Results
 We use [FAISS](https://github.com/facebookresearch/faiss) for KNN evaluation and calculate Top1 Accuracy under different sparsity conditions.
-Note that we follow the pipeline of [MRL](https://github.com/RAIVNLab/MRL/tree/main/retrieval) for fair comparison.
+Note that we follow the pipeline of [MRL](https://github.com/RAIVNLab/MRL/tree/main/retrieval) for a fair comparison.
 ```bash
 cd retrieval
 # Get FAISS index
@@ -90,6 +90,7 @@ python faiss_nn.py --topk 8
 # Evaluate Top1 accuracy
 python compute_metrics.py --topk 8
 ```
+
 ### Citing this paper
 If you find this work useful, please cite the accompanying paper:
 ```
