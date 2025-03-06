@@ -8,18 +8,23 @@ By [Tiansheng Wen\*](https://neilwen987.github.io/), [Yifei Wang\*](https://yife
 
 In this paper, we show that *sparse coding* offers a compelling alternative for achieving adaptive representation with minimal overhead and higher fidelity. We propose **C**ontrastive **S**parse **R**epresentation, a method that sparsifies pre-trained embeddings into a high-dimensional but *selectively activated* feature space. By leveraging lightweight autoencoding and task-aware contrastive objectives, CSR preserves semantic quality while allowing flexible, cost-effective inference at different sparsity levels. Extensive experiments on image, text, and multimodal benchmarks demonstrate that CSR consistently outperforms MRL in terms of both accuracy and retrieval speed-often by large margins-while also cutting training time to a fraction of that required by MRL. Our results establish sparse coding as a powerful paradigm for adaptive representation learning in real-world applications where efficiency and fidelity are both paramount.
 
+&#x1F680; &#x1F680; News
+- 2025.03.07  Weights for visual embeds(k=8 & 32), multimodal embeds(k=64) are now online!!
+- 2025.03.05  Code released! Let's embrace sparsity!!
+
 In this repo, we will release (**updating**):
 
 - Environment Dependencies &#x2705;
 - Checkpoints &#x1F4CC;
-  - Visual ckpt (on ImageNet)&#x1F4CC;
+  - Visual ckpt (on ImageNet)&#x2705;
   - Text ckpt (on partly MTEB datasets) &#x1F4CC;
-  - MutilModel ckpt (on MS COCO)&#x1F4CC;
+  - MutilModal ckpt (on MS COCO)&#x2705;
 - Reproducing Experiments &#x2705;
   - Dataset preparations &#x2705;
   - Training &#x2705;
   - Evaluation &#x2705;
   - Retrieval Time Evaluation &#x1F4CC;
+- Upload CSR on huggingface &#x1F4CC;
 
 ## Set Up
 Pip install the requirements file in this directory. Note that a python3 distribution is required:
@@ -95,6 +100,7 @@ python faiss_nn.py --topk 8
 # Evaluate Top1 accuracy
 python compute_metrics.py --topk 8
 ```
+We use [clip-retrieval](https://github.com/LAION-AI/CLIP_benchmark) to evaluate CSR's performance on multimodal retrieval tasks.
 
 ### Citing this paper
 If you find this work useful, please cite the accompanying paper:
