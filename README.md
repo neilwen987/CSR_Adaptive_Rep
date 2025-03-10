@@ -50,7 +50,7 @@ export WRITE_DIR=/your/path/here/
 ```
 
 ### Get Pre-trained ImageNet1k Embeddings
-For training and evaluation simplicity, we first extract image embeddings using Models from [Timm](https://github.com/huggingface/pytorch-image-models).
+For training and evaluation simplicity, we precompute image embeddings using models from [Timm](https://github.com/huggingface/pytorch-image-models).
 
 In our paper, we select [resnet50d.ra4_e3600_r224_in1k](https://huggingface.co/timm/resnet50d.ra4_e3600_r224_in1k) as our pre-trained visual backbone.
 To extract embeddings, run the following command:
