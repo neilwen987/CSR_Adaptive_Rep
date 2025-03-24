@@ -10,7 +10,7 @@ from tqdm import tqdm
 from timeit import default_timer as timer
 import math
 import numpy as np
-
+import argparse
 from tqdm import tqdm
 import logging
 import math
@@ -20,6 +20,9 @@ from typing import Dict, List, Optional, Tuple
 import numpy as np
 import torch
 import torch.distributed as dist
+
+from clip_benchmark.datasets.builder import build_dataset
+import pandas as pd
 
 
 '''
@@ -188,3 +191,27 @@ class GatherLayer(torch.autograd.Function):
 def gather(X, dim=0):
     """Gathers tensors from all processes, supporting backward propagation."""
     return torch.cat(GatherLayer.apply(X), dim=dim)
+
+def get_mm_dataset(root_path, dataset='mscoco_captions'):
+	for split in ['train','val']:
+		ds = build_dataset(dataset, root=root_path, split=split,
+						   task="captioning")  # this downloads the dataset if it is not there already
+		coco = ds.coco
+		imgs = coco.loadImgs(coco.getImgIds())
+		future_df = {"filepath": [], "title": []}
+		for img in imgs:
+			caps = coco.imgToAnns[img["id"]]
+			for cap in caps:
+				future_df["filepath"].append(img["file_name"])
+				future_df["title"].append(cap["caption"])
+		pd.DataFrame.from_dict(future_df).to_csv(
+			os.path.join(root_path, f"{split}2014.csv"), index=False, sep="\t"
+		)
+	return print(f'Successfully create {dataset} dataste')
+
+if __name__ == '__main__':
+	parser = argparse.ArgumentParser()
+	parser.add_argument('--root_path', type=str,required=True,help='root path for mm dataset')
+	parser.add_argument('--dataset_name', type=str, default='mscoco_captions',help='dataset name')
+	args = parser.parse_args()
+	get_mm_dataset(args.root_path,args.dataset_name)

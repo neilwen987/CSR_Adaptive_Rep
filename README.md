@@ -33,6 +33,7 @@ Pip install the requirements file in this directory. Note that a python3 distrib
 pip3 install -r requirements.txt
 ```
 
+## Reproduce Visual Exp on Imagenet1k
 ### Preparing the Dataset
 Following the ImageNet training pipeline of [FFCV](https://github.com/libffcv/ffcv-imagenet) for ResNet50, generate the dataset with the following command (`IMAGENET_DIR` should point to a PyTorch style [ImageNet dataset](https://github.com/MadryLab/pytorch-imagenet-dataset)):
 
@@ -68,7 +69,7 @@ FYI : I did this only because memory constrain on my computer, otherwise you can
 
 ### Train Contrastvie Sparse Representation on Imagenet1K
 ```bash
-python main.py \
+python main_visual.py \
       --pretrained_emb /path/to/pretrained_emb \
       --model_name "pre-trained visual backbone" \
       --use_ddp False \     # set True if you want to use multi-GPU
@@ -100,6 +101,15 @@ cd retrieval
 python faiss_nn.py --topk 8
 # Evaluate Top1 accuracy
 python compute_metrics.py --topk 8
+```
+
+## Reproduce MultiModal Exp on MS COCO 2014
+
+### Preparing the Dataset
+```bash
+python utils.py \
+      --root_path  /path/to/mm_dataset \
+      --dataset_name 'mscoco_captions' \ 
 ```
 We use [clip-retrieval](https://github.com/LAION-AI/CLIP_benchmark) to evaluate CSR's performance on multimodal retrieval tasks.
 
