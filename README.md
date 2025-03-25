@@ -111,6 +111,24 @@ python utils.py \
       --root_path  /path/to/mm_dataset \
       --dataset_name 'mscoco_captions' \ 
 ```
+
+### Fine-tune Pre-trained CLIP on MS COCO
+For fair comparison, we first fine CLIP on MS COCO for 50 epochs using following command.
+```bash
+torchrun --nproc_per_node 4 -m open_clip_train.main \
+         --save-frequency 1 \
+         --train-data= absolute/path/to/train2014.csv \  
+         --val-data= absolute/path/to/val2014.csv\    
+         --warmup 10000 \
+         --batch-size=64 \
+         --lr=5e-6 \
+         --wd=0.1 \
+         --workers=16 \
+         --epochs=50 \
+         --model ViT-B-16 \
+         --pretrained dfn2b \
+```
+
 We use [clip-retrieval](https://github.com/LAION-AI/CLIP_benchmark) to evaluate CSR's performance on multimodal retrieval tasks.
 
 ### Citing this paper

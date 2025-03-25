@@ -1,29 +1,13 @@
-import os
-
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-from torch.cuda.amp import autocast
-from typing import Type, Any, Callable, Union, List, Optional
-from torchvision.models import *
-from tqdm import tqdm
-from timeit import default_timer as timer
-import math
-import numpy as np
 import argparse
-from tqdm import tqdm
-import logging
-import math
 import os
-from typing import Dict, List, Optional, Tuple
-
 import numpy as np
 import torch
 import torch.distributed as dist
-
-from clip_benchmark.datasets.builder import build_dataset
 import pandas as pd
-
+from clip_benchmark.datasets.builder import build_dataset
+from tqdm import tqdm
+from torch.cuda.amp import autocast
+from pathlib import Path
 
 '''
 Retrieval utility methods.
@@ -199,10 +183,11 @@ def get_mm_dataset(root_path, dataset='mscoco_captions'):
 		coco = ds.coco
 		imgs = coco.loadImgs(coco.getImgIds())
 		future_df = {"filepath": [], "title": []}
+		abs_path =  Path(root_path).resolve()
 		for img in imgs:
 			caps = coco.imgToAnns[img["id"]]
 			for cap in caps:
-				future_df["filepath"].append(img["file_name"])
+				future_df["filepath"].append(abs_path/f'{split}2014'/img["file_name"])
 				future_df["title"].append(cap["caption"])
 		pd.DataFrame.from_dict(future_df).to_csv(
 			os.path.join(root_path, f"{split}2014.csv"), index=False, sep="\t"
