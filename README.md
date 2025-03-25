@@ -22,9 +22,15 @@ In this repo, we will release (**updating**):
   - Text ckpt (on partly MTEB datasets) &#x1F4CC;
   - MutilModal ckpt (on MS COCO)&#x2705;
 - Reproducing Experiments &#x2705;
-  - Dataset preparations &#x2705;
-  - Training &#x2705;
-  - Evaluation &#x2705;
+  - Visual Exp&#x2705;
+    - Dataset preparations &#x2705;
+    - Training &#x2705;
+    - Evaluation &#x2705;
+  - Text Exp &#x1F4CC;
+  - MultiModal Exp &#x2705;
+    - Dataset preparations &#x2705;
+    - Training &#x2705;
+    - Evaluation &#x2705;
   - Retrieval Time Evaluation &#x1F4CC;
 - Upload CSR on HugginFace &#x1F4CC;
 
