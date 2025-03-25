@@ -4,7 +4,7 @@ import timm
 import torch.nn.functional as F
 import numpy as np
 from torch.utils.data import Dataset, DataLoader
-
+from typing import Optional
 
 class TiedTranspose(nn.Module):
     def __init__(self, linear: nn.Linear):
@@ -27,7 +27,7 @@ class TiedTranspose(nn.Module):
 class CSR(nn.Module):
     def __init__(
             self, n_latents: int, topk :int ,auxk :int ,normalize :bool, n_inputs: int ,dead_threshold :int,
-            pre_trained_backbone: nn.Module,
+            pre_trained_backbone: Optional[nn.Module] = None,
     ) -> None:
         """
         :param n_latents: dimension of the autoencoder latent

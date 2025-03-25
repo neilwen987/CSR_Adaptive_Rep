@@ -9,6 +9,7 @@ By [Tiansheng Wen\*](https://neilwen987.github.io/), [Yifei Wang\*](https://yife
 In this paper, we show that *sparse coding* offers a compelling alternative for achieving adaptive representation with minimal overhead and higher fidelity. We propose **C**ontrastive **S**parse **R**epresentation, a method that sparsifies pre-trained embeddings into a high-dimensional but *selectively activated* feature space. By leveraging lightweight autoencoding and task-aware contrastive objectives, CSR preserves semantic quality while allowing flexible, cost-effective inference at different sparsity levels. Extensive experiments on image, text, and multimodal benchmarks demonstrate that CSR consistently outperforms MRL in terms of both accuracy and retrieval speed-often by large margins-while also cutting training time to a fraction of that required by MRL. Our results establish sparse coding as a powerful paradigm for adaptive representation learning in real-world applications where efficiency and fidelity are both paramount. 
 
 ## &#x1F680; &#x1F680; News
+- 2025.03.25 Evaluation framework for multimodal retrieval tasks are now online!! &#x1F389;&#x1F389;
 - 2025.03.07  [Weights](https://drive.google.com/drive/folders/1fI4ip-tcjSrmXtFANmIDTh1wERPlfySO?usp=sharing)
  for visual embeds(k=8 & 32), multimodal embeds(k=64) are now online!! &#x1F601;&#x1F601;
 - 2025.03.05  Code released! Let's embrace sparsity!! &#x1F389;&#x1F389;
@@ -128,8 +129,23 @@ torchrun --nproc_per_node 4 -m open_clip_train.main \
          --model ViT-B-16 \
          --pretrained dfn2b \
 ```
-
+### Get retrieval results on MS_COCO
 We use [clip-retrieval](https://github.com/LAION-AI/CLIP_benchmark) to evaluate CSR's performance on multimodal retrieval tasks.
+
+```bash
+python main_multimodal.py eval \
+      --dataset=mscoco_captions \
+      --task=zeroshot_retrieval \
+      --pretrained= /path/to/fine-tuned/CLIP \
+       --model=ViT-B-16 \
+       --output=./result.json \
+       --batch_size=64 \
+       --dataset_root=./dataset \
+       --recall_k=5 \
+       --csr=True \
+       --topk=64 \
+       --csr_ckpt= /path/to/csr_ckpt \ 
+```
 
 ### Citing this paper
 If you find this work useful, please cite the accompanying paper:
