@@ -168,7 +168,7 @@ def main_worker(gpu, ngpus_per_node, args):
     print("=> Creating CSR model, use pre-trained model '{}'".format(args.model_name))
     # Loading without the fc layer
     sota_backbone = timm.create_model(args.model_name, pretrained=True, num_classes=1000, )
-    state_dict = torch.load(args.backbone_ckpt, map_location='cpu')
+    # state_dict = torch.load(args.backbone_ckpt, map_location='cpu')
     sota_backbone.load_state_dict(state_dict)
 
     sota_backbone.eval()
