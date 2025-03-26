@@ -27,7 +27,7 @@ from clip_benchmark.metrics import (captioning, image_caption_selection,
 from clip_benchmark.model_collection import (get_model_collection_from_file,
                                              model_collection)
 from clip_benchmark.models import MODEL_TYPES, load_clip
-from retrieval.mn_retrieval import mm_evaluate
+from retrieval.mm_retrieval import mm_evaluate
 from collections import OrderedDict
 from model_zoo import CSR
 
