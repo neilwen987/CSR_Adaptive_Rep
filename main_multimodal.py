@@ -85,21 +85,21 @@ def get_parser_args():
     ## Added for CSR embeds
 
     # CSR parameters
-    parser.add_argument('--csr', default=True,
+    parser_eval.add_argument('--csr', default=True,
                         action='store_true', help='whether to use CSR model')
-    parser.add_argument('--topk', default=64, type=int, dest='topk',
+    parser_eval.add_argument('--topk', default=64, type=int, dest='topk',
                         help='the number of topk')
-    parser.add_argument('--auxk', default=512, type=int, dest='auxk',
+    parser_eval.add_argument('--auxk', default=512, type=int, dest='auxk',
                         help='the number of auxk')
-    parser.add_argument('--auxk_coef', default=1 / 32, type=float, dest='auxk_coef',
+    parser_eval.add_argument('--auxk_coef', default=1 / 32, type=float, dest='auxk_coef',
                         help='auxk_coef')
-    parser.add_argument('--dead_threshold', default=30, type=int, dest='dead_threshold',
+    parser_eval.add_argument('--dead_threshold', default=30, type=int, dest='dead_threshold',
                         help='dead_threshold')
-    parser.add_argument('--input_dim', default=512, type=int, dest='input_dim',
+    parser_eval.add_argument('--input_dim', default=512, type=int, dest='input_dim',
                         help='input dim of ViT-B')
-    parser.add_argument('--hidden-size', default=512*4, type=int, dest='hidden_size',
+    parser_eval.add_argument('--hidden-size', default=512*4, type=int, dest='hidden_size',
                         help='the size of hidden layer')
-    parser.add_argument('--csr_ckpt', default=None, type=str, dest='csr_ckpt',
+    parser_eval.add_argument('--csr_ckpt', default=None, type=str, dest='csr_ckpt',
                         help='ckpt path of csr')
 
     args = parser.parse_args()
