@@ -77,11 +77,6 @@ def get_parser_args():
     parser_eval.add_argument('--wds_cache_dir', default=None, type=str, help="optional cache directory for webdataset only")
     parser_eval.set_defaults(which='eval')
 
-    parser_build = subparsers.add_parser('build', help='Build CSV from evaluations')
-    parser_build.add_argument('files', type=str,  nargs="+", help="path(s) of JSON result files")
-    parser_build.add_argument('--output', type=str,  default="benchmark.csv", help="CSV output file")
-    parser_build.set_defaults(which='build')
-
     ## Added for CSR embeds
 
     # CSR parameters
@@ -101,6 +96,13 @@ def get_parser_args():
                         help='the size of hidden layer')
     parser_eval.add_argument('--csr_ckpt', default=None, type=str, dest='csr_ckpt',
                         help='ckpt path of csr')
+
+    parser_build = subparsers.add_parser('build', help='Build CSV from evaluations')
+    parser_build.add_argument('files', type=str,  nargs="+", help="path(s) of JSON result files")
+    parser_build.add_argument('--output', type=str,  default="benchmark.csv", help="CSV output file")
+    parser_build.set_defaults(which='build')
+
+
 
     args = parser.parse_args()
     return parser, args
