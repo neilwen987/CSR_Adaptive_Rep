@@ -3,7 +3,7 @@ from tqdm import tqdm
 import numpy as np
 data_list =[]
 
-embed_path = './retrieval/pretrained_emb/train_emb'
+embed_path = './retrieval/pretrained_emb/train_emb/img'
 for file in tqdm(os.listdir(embed_path)):
     data = np.load(os.path.join(embed_path,file))
     data_list.append(data)
