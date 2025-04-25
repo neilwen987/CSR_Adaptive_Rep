@@ -94,6 +94,7 @@ parser.add_argument('--topk', default=8, type=int, dest='topk',
                     help='the number of topk')
 parser.add_argument('--auxk', default=512, type=int, dest='auxk',
                     help='the number of auxk')
+parser.add_argument('--cl_coef', default=0.1, type=float,help='cl_coef')
 parser.add_argument('--auxk_coef', default=1/32, type=float, dest='auxk_coef',
                     help='auxk_coef')
 parser.add_argument('--dead_threshold', default=30, type=int, dest='dead_threshold',
@@ -328,7 +329,7 @@ def train(train_loader, model, criterion, optimizer, epoch, device, args):
             x_2, latents_pre_act_2, latents_k_2, recons_2, recons_aux_2 = model(images)
             loss_cl = inbatch_cl(latents_k_1, latents_k_2)
 
-        loss = loss_k + 0.125 * loss_4k + args.auxk_coef * loss_auxk + 1 * loss_cl
+        loss = loss_k + 0.125 * loss_4k + args.auxk_coef * loss_auxk + args.cl_coef * loss_cl
 
         losses.update(loss_k.item(), images.size(0))
 

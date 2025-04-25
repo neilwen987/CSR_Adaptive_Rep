@@ -41,6 +41,11 @@ pip3 install -r requirements.txt
 ```
 
 ## Reproduce Visual Exp on Imagenet1k
+### Get pre-compute embeds from Huggingface🤗!
+We provide embeds extracted by FF2048 backbones (same backbone weights with MRL), and embeds by SoTA backbones at
+[Dataset Link](https://huggingface.co/datasets/W1nd-navigator/CSR-precompute-embeds) 
+
+To train CSR with different visual backbones, please follow the preparation steps below.
 ### Preparing the Dataset
 Following the ImageNet training pipeline of [FFCV](https://github.com/libffcv/ffcv-imagenet) for ResNet50, generate the dataset with the following command (`IMAGENET_DIR` should point to a PyTorch style [ImageNet dataset](https://github.com/MadryLab/pytorch-imagenet-dataset)):
 
@@ -110,48 +115,53 @@ python faiss_nn.py --topk 8
 python compute_metrics.py --topk 8
 ```
 
-## Reproduce MultiModal Exp on MS COCO 2014
+## Reproduce MultiModal Exp
 
-### Preparing the Dataset
-```bash
-python utils.py \
-      --root_path  /path/to/mm_dataset \
-      --dataset_name 'mscoco_captions' \ 
-```
+### Train CSR on CC3M and eval on MS COCO and Flickr30K (Zero-Shot)
 
-### Fine-tune Pre-trained CLIP on MS COCO
-For a fair comparison, we first fine CLIP on MS COCO for 50 epochs using the following command.
 ```bash
-torchrun --nproc_per_node 4 -m open_clip_train.main \
+torchrun --nproc_per_node=1 ./main_multimodal.py\
+         --train-data "./cc3m_wds/cc3m-train-{0000..575}.tar" # path to training datsets
+         --train-num-samples 2905954 \
+         --dataset-type webdataset \
+         --precision amp \
+         --workers 16 \
+         --model "ViT-B-16"\
+         --pretrained "dfn2b" \
+         --epochs 5 \
          --save-frequency 1 \
-         --train-data= absolute/path/to/train2014.csv \  
-         --val-data= absolute/path/to/val2014.csv\    
-         --warmup 10000 \
-         --batch-size=64 \
-         --lr=5e-6 \
-         --wd=0.1 \
-         --workers=16 \
-         --epochs=50 \
-         --model ViT-B-16 \
-         --pretrained dfn2b \
+         --report-to tensorboard \
+         --csr-topk 64 \
+         --csr-auxk 1024 \
+         --csr-cl_coef 1 \
+         --csr-hidden-size 2048 \
+         --csr-input-dim 512 \
+         --batch-size 1024 \
+         --lr 4e-4 \
+         --wd 1e-4 \
+         --precision amp \
+         --grad-clip-norm 1.0 \
+         --save-frequency 1 \
 ```
-### Get retrieval results on MS_COCO
-We use [clip-retrieval](https://github.com/LAION-AI/CLIP_benchmark) to evaluate CSR's performance on multimodal retrieval tasks.
 
+### Evaluate CSR performance
 ```bash
-python main_multimodal.py eval \
-      --dataset=mscoco_captions \
-      --task=zeroshot_retrieval \
-      --pretrained= /path/to/fine-tuned/CLIP \
-       --model=ViT-B-16 \
-       --output=./result.json \
-       --batch_size=64 \
-       --dataset_root=./dataset \
-       --recall_k=5 \
-       --csr=True \
-       --topk=64 \
-       --csr_ckpt= /path/to/csr_ckpt \ 
+python main_multimodal.py eval
+    --dataset=mscoco_captions \
+    --dataset_root="DATASET_ROOT" \
+    --task=zeroshot_retrieval \
+    --model="ViT-B-16" \
+    --pretrained="dnf2b" \
+    --output="./result.json" \
+    --batch_size=64 \
+    --recall_k=5 \
+    --csr=True\
+    --csr_ckpt=$CSR_CKPT\
+    --topk=$Topk\
+    --hidden-size=2048\
+    --rep_dim=$Topk
 ```
+
 And the results can be fine in ./result.json.
 
 ### Citing this paper
