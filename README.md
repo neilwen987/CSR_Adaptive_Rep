@@ -107,7 +107,10 @@ python inference/csr_inference.py \
 
 ### Get Evaluation Results
 We use [FAISS](https://github.com/facebookresearch/faiss) for KNN evaluation and calculate Top1 Accuracy under different sparsity conditions.
-Note that we follow the pipeline of [MRL](https://github.com/RAIVNLab/MRL/tree/main/retrieval) for a fair comparison.
+We follow the pipeline of [MRL](https://github.com/RAIVNLab/MRL/tree/main/retrieval) for a fair comparison.
+It shouldn be noted that this evaluation process runs on a 128-CPU server, requires approximately 150GB of memory, and takes about 20 minutes to complete. 
+Further optimization is needed, and we welcome collaboration.  
+
 ```bash
 cd retrieval
 # Get FAISS index
