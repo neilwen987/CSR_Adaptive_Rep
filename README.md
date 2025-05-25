@@ -140,54 +140,53 @@ python ./retrieval/faiss_nn.py --topk 8
 python ./retrieval/compute_metrics.py --topk 8
 ```
 
-## Reproduce MultiModal Exp
-
-### Train CSR on CC3M and eval on MS COCO and Flickr30K (Zero-Shot)
-
-```bash
-torchrun --nproc_per_node=1 ./main_multimodal.py\
-         --train-data "./cc3m_wds/cc3m-train-{0000..575}.tar" # path to training datsets
-         --train-num-samples 2905954 \
-         --dataset-type webdataset \
-         --precision amp \
-         --workers 16 \
-         --model "ViT-B-16"\
-         --pretrained "dfn2b" \
-         --epochs 5 \
-         --save-frequency 1 \
-         --report-to tensorboard \
-         --csr-topk 64 \
-         --csr-auxk 1024 \
-         --csr-cl_coef 1 \
-         --csr-hidden-size 2048 \
-         --csr-input-dim 512 \
-         --batch-size 1024 \
-         --lr 4e-4 \
-         --wd 1e-4 \
-         --precision amp \
-         --grad-clip-norm 1.0 \
-         --save-frequency 1 \
+## MultiModal Representation
+We evaluate on **multi-model retrieval** tasks for multi-modal representation comparison.
+```sh
+cd ./Multi-model/
 ```
-
-### Evaluate CSR performance
-```bash
-python main_multimodal.py eval
-    --dataset=mscoco_captions \
-    --dataset_root="DATASET_ROOT" \
-    --task=zeroshot_retrieval \
-    --model="ViT-B-16" \
-    --pretrained="dnf2b" \
-    --output="./result.json" \
-    --batch_size=64 \
-    --recall_k=5 \
-    --csr=True\
-    --csr_ckpt=$CSR_CKPT\
-    --topk=$Topk\
-    --hidden-size=2048\
-    --rep_dim=$Topk
+### Train CSR Contrastive Sparse Representation
+You can use the following script to Train CSR on CC3M. You only need to customize the `$DEVICE` you would like to train on and `--train-data` (path to your training data).
+```sh
+CUDA_VISIBLE_DEVICES=$DEVICE torchrun --nproc_per_node=1 --rdzv-endpoint localhost:29400 ./multimodel_training.py\
+         --train-data "./cc3m-wds/cc3m-train-{0000..575}.tar" \
+         --train-num-samples 2905954 \
+         --dataset-type webdataset \
+         --precision amp \
+         --workers 16 \
+         --model "ViT-B-16"\
+         --pretrained "dfn2b" \
+         --epochs 5 \
+         --save-frequency 1 \
+         --report-to tensorboard \
+         --csr-topk 64 \
+         --csr-auxk 1024 \
+         --csr-cl_coef 1 \
+         --csr-hidden-size 2048 \
+         --csr-input-dim 512 \
+         --batch-size 1024 \
+         --lr 4e-4 \
+         --wd 1e-4 \
+         --grad-clip-norm 1.0 \
+         --save-frequency 1
 ```
-
-And the results can be fine in ./result.json.
+### Evaluation on MSCOCO and Flickr30K
+You can evaluate trained CSR with the following script. You need to decide on the `--dataset`, `--output` (path to store the evaluation results) and `-csr_ckpt` (path to the CSR model).
+```sh
+python main_multimodal.py eval \
+    --dataset "flickr30k_or_MSCOCO" \
+    --task "zeroshot_retrieval" \
+    --pretrained "dfn2b" \
+    --model "ViT-B-16" \
+    --output "Path/to/JSON/file" \
+    --batch_size 64 \
+    --dataset_root "./flickr30k_dataset" \
+    --recall_k 5 \
+    --csr_ckpt "Path/to/CSR" \
+    --topk 256 \
+    --hidden-size 2048 \
+    --rep_dim 1024
+```
 
 ### Citing this paper
 If you find this work useful, please cite the accompanying paper:
@@ -203,6 +202,6 @@ If you find this work useful, please cite the accompanying paper:
 }
 ```
 ### Acknowledgements
-This repository was built off of [Sparse_AutoEncoder](https://github.com/openai/sparse_autoencoder), [Torchvision](https://github.com/pytorch/vision).
+This repository was built off of [Sparse_AutoEncoder](https://github.com/openai/sparse_autoencoder), [Torchvision](https://github.com/pytorch/vision), [Open-clip](https://github.com/mlfoundations/open_clip).
 
 
