@@ -9,6 +9,11 @@ By [Tiansheng Wen\*](https://neilwen987.github.io/), [Yifei Wang\*](https://yife
 In this paper, we show that *sparse coding* offers a compelling alternative for achieving adaptive representation with minimal overhead and higher fidelity. We propose **C**ontrastive **S**parse **R**epresentation, a method that sparsifies pre-trained embeddings into a high-dimensional but *selectively activated* feature space. By leveraging lightweight autoencoding and task-aware contrastive objectives, CSR preserves semantic quality while allowing flexible, cost-effective inference at different sparsity levels. Extensive experiments on image, text, and multimodal benchmarks demonstrate that CSR consistently outperforms MRL in terms of both accuracy and retrieval speed-often by large margins-while also cutting training time to a fraction of that required by MRL. Our results establish sparse coding as a powerful paradigm for adaptive representation learning in real-world applications where efficiency and fidelity are both paramount. 
 
 ## &#x1F680; &#x1F680; News
+- 2025.05.25 **Major Update**. We have thoroughly reorganized our repository with the following changes: 🎉🎉
+  - Minor code changes on Visual Experiments, especially dataset preparation.
+  - Training & Evaluation Pipeline for Text Experiments, including text classification, text clustering and text retrieval.
+  - Minor changes in codes for Multimodal Experiments.
+  - More detailed instructions for Data Preparation & Training & Evaluation.
 - 2025.04.25 Training & Evaluation Pipeline for Multimodal Retrieval is Now Live! We further provide pre-computed ImageNet1k embeddings at [Dataset Link](https://huggingface.co/datasets/W1nd-navigator/CSR-precompute-embeds) for easy follow up! 🙌🙌
 - 2025.03.25 Evaluation framework for multimodal retrieval tasks is now online!! &#x1FABC;&#x1FABC;
 - 2025.03.07  [Weights](https://drive.google.com/drive/folders/1fI4ip-tcjSrmXtFANmIDTh1wERPlfySO?usp=sharing)
@@ -27,7 +32,10 @@ In this repo, we will release (**updating**):
     - Dataset preparations &#x2705;
     - Training &#x2705;
     - Evaluation &#x2705;
-  - Text Exp &#x1F4CC;
+  - Text Exp;
+    - Dataset preparations &#x2705;
+    - Training &#x2705;
+    - Evaluation &#x1F4CC;
   - MultiModal Exp &#x2705;
     - Dataset preparations &#x2705;
     - Training &#x2705;
@@ -35,10 +43,11 @@ In this repo, we will release (**updating**):
   - Retrieval Time Evaluation &#x1F4CC;
 - Upload CSR on HugginFace &#x1F4CC;
 
-## Set Up
-Pip install the requirements file in this directory. Note that a python3 distribution is required:
-```
-pip3 install -r requirements.txt
+## Set up
+You only need to prepare an empty conda environment with Python 3 (reference version: Python 3.8.20) and `pip install` the `requirements.txt` file in this directory.
+```sh
+conda create --name csr python=3.8.20
+pip install -r requirements.txt
 ```
 
 ## Reproduce Visual Exp on Imagenet1k
