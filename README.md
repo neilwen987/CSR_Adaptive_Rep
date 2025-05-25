@@ -140,6 +140,121 @@ python ./retrieval/faiss_nn.py --topk 8
 python ./retrieval/compute_metrics.py --topk 8
 ```
 
+## Text Representation
+We focus on three kinds of tasks for comparison: **Text Classification**, **Text Clustering** and **Text Retrieval**. First, please move to our `text_representation` codebase directory.
+```sh
+cd ./Text
+```
+### Text Classification
+We focus on three datasets for classification: [MTOPIntent](https://huggingface.co/datasets/mteb/mtop_intent), [Banking77](https://huggingface.co/datasets/mteb/banking77) and [tweetSentiment](https://huggingface.co/datasets/mteb/tweet_sentiment_extraction).
+#### Data Preparation
+We download these datasets from hugging face to `./datasets` directory. You can use `load_dataset` API if you like (minor changes to code may be needed). If you follow our way of data preparation, no extra change to original data is necessary. For instance, `banking77` directory should be organized in the following format:
+```
+./banking77
+├── README.md
+├── data
+│   ├── test-00000-of-00001.parquet
+│   └── train-00000-of-00001.parquet
+├── prepare_data.py
+├── test.jsonl
+└── train.jsonl
+```
+#### Get embeddings
+You can get  our pre-computed [NV-Embed-v2](https://huggingface.co/nvidia/NV-Embed-v2) from . Or you can use `./get_embeddings/get_classification_embeddings.py` to generate your own embeddings.
+```sh
+cd get_embeddings/
+python get_classification_embeddings.py \
+	--dataset "Dataset_name" \  # Dataset to process
+	--language None \ # Required for MTOP_Intent dataset
+	--split None # default: all splits
+```
+#### Train Contrastive Sparse Representation
+
+#### Get CSR embeddings for Evaluation
+
+#### Get Evaluation Results
+We use **Top-1 Acc (%)** as the text classification evaluation metrics. The training set embeddings are used to train a logistic regression classifier, which is scored on the test set. You only need to customize the `task_name``training_embedding_path` and `test_embedding_path`.
+```sh
+python ./evaluation_on_textclassification.py \
+	--training_embedding_path "Path/to/Training/Set/embeddings" \
+	--test_embedding_path "Path/to/Test/Set/Embeddings" \
+	--n_jobs -1 \
+	--verbose 0 \
+	--max_iter 2000
+```
+
+### Text Clustering 
+We focus on three datasets for clustering: [BiorxivP2P](https://huggingface.co/datasets/mteb/biorxiv-clustering-p2p), [BiorxivS2S](https://huggingface.co/datasets/mteb/biorxiv-clustering-s2s) and [TwentyNews](https://huggingface.co/datasets/mteb/twentynewsgroups-clustering).
+#### Data preparation
+Please follow the data preparation pipeline in Text Classification. For instance, `biorxiv-clustering-p2p` directory should be organized in the following format:
+```shell
+./biorxiv-clustering-p2p
+├── README.md
+└── test.jsonl
+```
+#### Get embeddings
+You can get  our pre-computed [NV-Embed-v2](https://huggingface.co/nvidia/NV-Embed-v2) from. Or you can use `./get_embeddings/get_clustering_embeddings.py` to generate your own embeddings.
+```sh
+cd get_embeddings/
+python get_clustering_embeddings.py \
+	--dataset "Dataset_name" \  # Dataset to process
+	--split None # default: all splits
+```
+#### Train Contrastive Sparse Representation
+
+#### Get CSR embeddings for Evaluation
+
+#### Get Evaluation Results
+We use **Top-1 Acc (%)** as the text clustering evaluation metrics. A mini-batch k-means model with batch size 32 and `n_clusters` equal to the number of different labels is trained on the embeddings. You need to customize the `--n_clusters` and `--embedding_path`.
+```sh
+python ./evaluation_on_textclustering.py \
+	--embedding_path "Path/to/embeddings" \
+	--n_clusters $cluster_num \ # The number of classes in each dataset
+	--batch_size 32 \
+	--n_init "auto"
+```
+
+### Text Retrieval
+We focus on three datasets for retrieval: [FiQA2018](https://huggingface.co/datasets/mteb/fiqa), [NFCorpus](https://huggingface.co/datasets/mteb/nfcorpus), and [SciFACT](https://huggingface.co/datasets/mteb/scifact). 
+#### Data preparation
+Please follow the data preparation pipeline in Text Classification. For instance, `scifact` directory should be organized in the following format:
+```sh
+./scifact
+├── README.md
+├── concat_two_embeddings.py
+├── corpus.jsonl
+├── qrels
+│   ├── test.jsonl
+│   ├── test.tsv
+│   ├── train.jsonl
+│   └── train.tsv
+├── queries.jsonl
+```
+#### Get embeddings
+You can get our pre-computed [NV-Embed-v2](https://huggingface.co/nvidia/NV-Embed-v2) from . Or you can use `./get_embeddings/get_retrieval_embeddings.py` to generate your own embeddings.
+```sh
+cd get_embeddings/
+python get_retrieval_embeddings.py \
+	--dataset "Dataset_name" \  # Dataset to process
+	--language None \ # Required for MTOP_Intent dataset
+	--split None # default: all splits
+```
+#### Train Contrastive Sparse Representation
+
+#### Get CSR embeddings for Evaluation
+
+#### Get Evaluation Results
+We use **NDCG@10 (%)** as the text retrieval evaluation metrics. The cosine similarity of the embeddings of each corpus-query pair is calculated. For each query, select the top ten corpus for NDCG@10 calculation. You need to customize the `--corpus_embed_path` (path to corpus embeddings), `--queries_embed_path` (path to queries embeddings), `corpus_jsonl` (in original dataset, to get the id for each corpus), `queries_jsonl` (in original dataset, to get the id for each query) and `qrels_path` (in original dataset, to get the relevance score for each query-corpus pair).
+```sh
+python evaluation_on_textretrieval.py \
+	--corpus_embed_path "Path/to/corpus/embeddings" \  # Path to corpus embeddings
+	--queries_embed_path "Path/to/queries/embeddings" \  # Path to queries embeddings
+	--corpus_jsonl "Path/to/corpus/JSONL" \  # Path to corpus JSONL file
+	--queries_jsonl "Path/to/queries/JSONL" \  # Path to queries JSONL file
+	--qrels_path "Path/to/qrels/TSV" \  # Path to qrels TSV file
+	--k 10 \  # Evaluate NDCG@k
+```
+
 ## MultiModal Representation
 We evaluate on **multi-model retrieval** tasks for multi-modal representation comparison.
 ```sh
