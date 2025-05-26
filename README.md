@@ -160,7 +160,7 @@ We download these datasets from hugging face to `./datasets` directory. You can 
 └── train.jsonl
 ```
 #### Get embeddings
-You can get  our pre-computed [NV-Embed-v2](https://huggingface.co/nvidia/NV-Embed-v2) from . Or you can use `./get_embeddings/get_classification_embeddings.py` to generate your own embeddings.
+You can get  our pre-computed [NV-Embed-v2](https://huggingface.co/nvidia/NV-Embed-v2) embeddings from . Or you can use `./get_embeddings/get_classification_embeddings.py` to generate your own embeddings.
 ```sh
 cd get_embeddings/
 python get_classification_embeddings.py \
@@ -169,11 +169,24 @@ python get_classification_embeddings.py \
 	--split None # default: all splits
 ```
 #### Train Contrastive Sparse Representation
+After getting embeddings, you can train CSR with `train_CSR_models.py`. You need to customize `--task_name`, `--pretrained_embed` and `--gpu`. 
+```sh
+python train_CSR_models.py \
+        --task_name $TASK_NAME \   # the dataset you want to train CSR on.
+        --pretrained_emb /path/to/your/embeddings \   # path to embeddings for training
+        --gpu $DEVICE \   # the device to train CSR
+        --batch-size 128 \
+        --lr 4e-5 \
+        --topk 32 \
+        --auxk 1024 \
+        --hidden-size 16384 \
+        --embed_dim 4096
+```
 
 #### Get CSR embeddings for Evaluation
 
 #### Get Evaluation Results
-We use **Top-1 Acc (%)** as the text classification evaluation metrics. The training set embeddings are used to train a logistic regression classifier, which is scored on the test set. You only need to customize the `task_name``training_embedding_path` and `test_embedding_path`.
+We use **Top-1 Acc (%)** as the text classification evaluation metrics. The training set embeddings are used to train a logistic regression classifier, which is scored on the test set. You only need to customize the `--training_embedding_path` and `--test_embedding_path`.
 ```sh
 python ./evaluation_on_textclassification.py \
 	--training_embedding_path "Path/to/Training/Set/embeddings" \
@@ -193,7 +206,7 @@ Please follow the data preparation pipeline in Text Classification. For instance
 └── test.jsonl
 ```
 #### Get embeddings
-You can get  our pre-computed [NV-Embed-v2](https://huggingface.co/nvidia/NV-Embed-v2) from. Or you can use `./get_embeddings/get_clustering_embeddings.py` to generate your own embeddings.
+You can get our pre-computed [NV-Embed-v2](https://huggingface.co/nvidia/NV-Embed-v2) embeddings from . Or you can use `./get_embeddings/get_clustering_embeddings.py` to generate your own embeddings.
 ```sh
 cd get_embeddings/
 python get_clustering_embeddings.py \
@@ -201,6 +214,19 @@ python get_clustering_embeddings.py \
 	--split None # default: all splits
 ```
 #### Train Contrastive Sparse Representation
+After getting embeddings, you can train CSR with `train_CSR_models.py`. You need to customize `--task_name`, `--pretrained_embed` and `--gpu`. 
+```sh
+python train_CSR_models.py \
+        --task_name $TASK_NAME \   # the dataset you want to train CSR on.
+        --pretrained_emb /path/to/your/embeddings \   # path to embeddings for training
+        --gpu $DEVICE \   # the device to train CSR
+        --batch-size 128 \
+        --lr 4e-5 \
+        --topk 32 \
+        --auxk 1024 \
+        --hidden-size 16384 \
+        --embed_dim 4096
+```
 
 #### Get CSR embeddings for Evaluation
 
@@ -231,7 +257,7 @@ Please follow the data preparation pipeline in Text Classification. For instance
 ├── queries.jsonl
 ```
 #### Get embeddings
-You can get our pre-computed [NV-Embed-v2](https://huggingface.co/nvidia/NV-Embed-v2) from . Or you can use `./get_embeddings/get_retrieval_embeddings.py` to generate your own embeddings.
+You can get our pre-computed [NV-Embed-v2](https://huggingface.co/nvidia/NV-Embed-v2) embeddings from . Or you can use `./get_embeddings/get_retrieval_embeddings.py` to generate your own embeddings.
 ```sh
 cd get_embeddings/
 python get_retrieval_embeddings.py \
@@ -240,11 +266,24 @@ python get_retrieval_embeddings.py \
 	--split None # default: all splits
 ```
 #### Train Contrastive Sparse Representation
+After getting embeddings, you can train CSR with `train_CSR_models.py`. You need to customize `--task_name`, `--pretrained_embed` and `--gpu`. 
+```sh
+python train_CSR_models.py \
+        --task_name $TASK_NAME \   # the dataset you want to train CSR on.
+        --pretrained_emb /path/to/your/embeddings \   # path to embeddings for training
+        --gpu $DEVICE \   # the device to train CSR
+        --batch-size 128 \
+        --lr 4e-5 \
+        --topk 32 \
+        --auxk 1024 \
+        --hidden-size 16384 \
+        --embed_dim 4096
+```
 
 #### Get CSR embeddings for Evaluation
 
 #### Get Evaluation Results
-We use **NDCG@10 (%)** as the text retrieval evaluation metrics. The cosine similarity of the embeddings of each corpus-query pair is calculated. For each query, select the top ten corpus for NDCG@10 calculation. You need to customize the `--corpus_embed_path` (path to corpus embeddings), `--queries_embed_path` (path to queries embeddings), `corpus_jsonl` (in original dataset, to get the id for each corpus), `queries_jsonl` (in original dataset, to get the id for each query) and `qrels_path` (in original dataset, to get the relevance score for each query-corpus pair).
+We use **NDCG@10 (%)** as the text retrieval evaluation metrics. The cosine similarity of the embeddings of each corpus-query pair is calculated. For each query, select the top ten corpus for NDCG@10 calculation. You need to customize the `--corpus_embed_path` (path to corpus embeddings), `--queries_embed_path` (path to queries embeddings), `--corpus_jsonl` (in original dataset, to get the id for each corpus), `--queries_jsonl` (in original dataset, to get the id for each query) and `--qrels_path` (in original dataset, to get the relevance score for each query-corpus pair).
 ```sh
 python evaluation_on_textretrieval.py \
 	--corpus_embed_path "Path/to/corpus/embeddings" \  # Path to corpus embeddings
