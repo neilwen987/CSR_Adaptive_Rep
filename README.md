@@ -35,7 +35,7 @@ In this repo, we will release (**updating**):
   - Text Exp;
     - Dataset preparations &#x2705;
     - Training &#x2705;
-    - Evaluation &#x1F4CC;
+    - Evaluation &#x2705;
   - MultiModal Exp &#x2705;
     - Dataset preparations &#x2705;
     - Training &#x2705;
@@ -184,6 +184,16 @@ python train_CSR_models.py \
 ```
 
 #### Get CSR embeddings for Evaluation
+You can get CSR embeddings with `text_classification_csr_inference.py`. You must customize `--train_emb_path` (path to training dataset embeddings), `--val_emb_path` (path to validation dataset embeddings) and `--csr_ckpt` (path to CSR model).
+
+```sh
+python ./text_classification_csr_inference.py \
+      --train_emb_path /path/to/training/dataset/embeddings \
+      --val_emb_path /path/to/validation/dataset/embeddings \
+      --topk 32 \
+      --hidden-size 16384 \
+      --csr_ckpt /path/to/CSR/model
+```
 
 #### Get Evaluation Results
 We use **Top-1 Acc (%)** as the text classification evaluation metrics. The training set embeddings are used to train a logistic regression classifier, which is scored on the test set. You only need to customize the `--training_embedding_path` and `--test_embedding_path`.
@@ -229,6 +239,15 @@ python train_CSR_models.py \
 ```
 
 #### Get CSR embeddings for Evaluation
+You can get CSR embeddings with `text_clustering_csr_inference.py`. You must customize `--test_emb_path` (path to test dataset embeddings) and `--csr_ckpt` (path to CSR model).
+
+```sh
+python ./text_clustering_csr_inference.py \
+      --test_emb_path /path/to/test/dataset/embeddings \
+      --topk 32 \
+      --hidden-size 16384 \
+      --csr_ckpt /path/to/CSR/model
+```
 
 #### Get Evaluation Results
 We use **Top-1 Acc (%)** as the text clustering evaluation metrics. A mini-batch k-means model with batch size 32 and `n_clusters` equal to the number of different labels is trained on the embeddings. You need to customize the `--n_clusters` and `--embedding_path`.
@@ -281,6 +300,16 @@ python train_CSR_models.py \
 ```
 
 #### Get CSR embeddings for Evaluation
+You can get CSR embeddings with `text_retrieval_csr_inference.py`. You must customize `--queries_emb_path` (path to training dataset embeddings), `--corpus_emb_path` (path to validation dataset embeddings) and `--csr_ckpt` (path to CSR model).
+
+```sh
+python ./text_retrieval_csr_inference.py \
+      --corpus_emb_path /path/to/corpus/embeddings \
+      --queries_emb_path /path/to/queries/embeddings \
+      --topk 32 \
+      --hidden-size 16384 \
+      --csr_ckpt /path/to/CSR/model
+```
 
 #### Get Evaluation Results
 We use **NDCG@10 (%)** as the text retrieval evaluation metrics. The cosine similarity of the embeddings of each corpus-query pair is calculated. For each query, select the top ten corpus for NDCG@10 calculation. You need to customize the `--corpus_embed_path` (path to corpus embeddings), `--queries_embed_path` (path to queries embeddings), `--corpus_jsonl` (in original dataset, to get the id for each corpus), `--queries_jsonl` (in original dataset, to get the id for each query) and `--qrels_path` (in original dataset, to get the relevance score for each query-corpus pair).
