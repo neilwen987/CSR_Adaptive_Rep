@@ -17,8 +17,8 @@ from collections import OrderedDict
 parser=ArgumentParser()
 
 # model args
-parser.add_argument('--test_emb_path', default='../retrieval/pretrained_emb/train_emb',
-                    help='path to pre-trained training embeddings (default: imagenet)')
+parser.add_argument('--test_emb_path', default='../retrieval/pretrained_emb/test_emb',
+                    help='path to pre-trained test embeddings (default: imagenet)')
 
 parser.add_argument('--retrieval_array_path', default='./retrieval',
                     help='path to save database and query arrays for retrieval', type=str)
