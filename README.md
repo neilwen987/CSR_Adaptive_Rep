@@ -8,6 +8,14 @@ By [Tiansheng Wen\*](https://neilwen987.github.io/), [Yifei Wang\*](https://yife
 
 In this paper, we show that *sparse coding* offers a compelling alternative for achieving adaptive representation with minimal overhead and higher fidelity. We propose **C**ontrastive **S**parse **R**epresentation, a method that sparsifies pre-trained embeddings into a high-dimensional but *selectively activated* feature space. By leveraging lightweight autoencoding and task-aware contrastive objectives, CSR preserves semantic quality while allowing flexible, cost-effective inference at different sparsity levels. Extensive experiments on image, text, and multimodal benchmarks demonstrate that CSR consistently outperforms MRL in terms of both accuracy and retrieval speed-often by large margins-while also cutting training time to a fraction of that required by MRL. Our results establish sparse coding as a powerful paradigm for adaptive representation learning in real-world applications where efficiency and fidelity are both paramount. 
 
+## 🧬 Source Repository
+
+This project is built on top of prior research and infrastructure from the Y-research team.
+
+👉 [Y Research](https://github.com/Y-Research-SBU/CSR)
+
+Please refer to the Y-research repo for more details.
+
 ## &#x1F680; &#x1F680; News
 - 2025.05.25 **Major Update**. We have thoroughly reorganized our repository with the following changes: 🎉🎉
   - Minor code changes on Visual Experiments, especially dataset preparation.
