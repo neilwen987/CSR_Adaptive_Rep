@@ -160,7 +160,7 @@ We download these datasets from hugging face to `./datasets` directory. You can 
 └── train.jsonl
 ```
 #### Get embeddings
-You can get  our pre-computed [NV-Embed-v2](https://huggingface.co/nvidia/NV-Embed-v2) embeddings from . Or you can use `./get_embeddings/get_classification_embeddings.py` to generate your own embeddings.
+You can get  our pre-computed [NV-Embed-v2](https://huggingface.co/nvidia/NV-Embed-v2) embeddings from [Dataset Link](https://huggingface.co/datasets/W1nd-navigator/CSR-precompute-embeds). Or you can use `./get_embeddings/get_classification_embeddings.py` to generate your own embeddings.
 ```sh
 cd get_embeddings/
 python get_classification_embeddings.py \
@@ -216,7 +216,7 @@ Please follow the data preparation pipeline in Text Classification. For instance
 └── test.jsonl
 ```
 #### Get embeddings
-You can get our pre-computed [NV-Embed-v2](https://huggingface.co/nvidia/NV-Embed-v2) embeddings from . Or you can use `./get_embeddings/get_clustering_embeddings.py` to generate your own embeddings.
+You can get our pre-computed [NV-Embed-v2](https://huggingface.co/nvidia/NV-Embed-v2) embeddings from [Dataset Link](https://huggingface.co/datasets/W1nd-navigator/CSR-precompute-embeds). Or you can use `./get_embeddings/get_clustering_embeddings.py` to generate your own embeddings.
 ```sh
 cd get_embeddings/
 python get_clustering_embeddings.py \
@@ -276,7 +276,7 @@ Please follow the data preparation pipeline in Text Classification. For instance
 ├── queries.jsonl
 ```
 #### Get embeddings
-You can get our pre-computed [NV-Embed-v2](https://huggingface.co/nvidia/NV-Embed-v2) embeddings from . Or you can use `./get_embeddings/get_retrieval_embeddings.py` to generate your own embeddings.
+You can get our pre-computed [NV-Embed-v2](https://huggingface.co/nvidia/NV-Embed-v2) embeddings from [Dataset Link](https://huggingface.co/datasets/W1nd-navigator/CSR-precompute-embeds). Or you can use `./get_embeddings/get_retrieval_embeddings.py` to generate your own embeddings.
 ```sh
 cd get_embeddings/
 python get_retrieval_embeddings.py \
