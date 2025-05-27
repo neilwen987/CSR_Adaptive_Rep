@@ -62,6 +62,7 @@ We provide embeds extracted by FF2048 backbones (same backbone weights with MRL)
 To train CSR with different visual backbones, please follow the preparation steps below.
 ##### Prepare Imagenet1k dataset
 **Step I**: Download Imagenet1k dataset and bounding box annotations from [Imagenet1k Official Website](https://www.image-net.org/).
+
 **Step II**: Convert the original dataset to [Pytorch style](https://github.com/MadryLab/pytorch-imagenet-dataset).
 ```shell
 # Prepare the annotations.txt file for both training and validation set
