@@ -31,12 +31,12 @@ Please refer to the Y Research repo for more details.
 In this repo, we will release (**updating**):
 
 - Environment Dependencies &#x2705;
-- Checkpoints &#x1F4CC;
-  - Visual ckpt (on ImageNet)&#x2705;
-  - Text ckpt (on partly MTEB datasets) &#x1F4CC;
-  - MutilModal ckpt (on MS COCO)&#x2705;
+- Checkpoints &#x2705;
+  - Visual ckpt (on ImageNet) &#x2705;
+  - Text ckpt (on partly MTEB datasets) &#x2705;
+  - MutilModal ckpt (on MS COCO) &#x2705;
 - Reproducing Experiments &#x2705;
-  - Visual Exp&#x2705;
+  - Visual Exp &#x2705;
     - Dataset preparations &#x2705;
     - Training &#x2705;
     - Evaluation &#x2705;
@@ -48,8 +48,8 @@ In this repo, we will release (**updating**):
     - Dataset preparations &#x2705;
     - Training &#x2705;
     - Evaluation &#x2705;
-  - Retrieval Time Evaluation &#x1F4CC;
-- Upload CSR on HugginFace &#x1F4CC;
+  - Retrieval Time Evaluation &#x2705;
+- loading CSR with [Sentence Transformers](https://github.com/UKPLab/sentence-transformers) &#x1F4CC;
 
 ## Set up
 You only need to prepare an empty conda environment with Python 3 (reference version: Python 3.8.20) and `pip install` the `requirements.txt` file in this directory.
