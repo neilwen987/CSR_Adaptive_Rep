@@ -103,6 +103,12 @@ parser.add_argument('--dead_threshold', default=30, type=int, dest='dead_thresho
 parser.add_argument('--hidden-size', default=None, type=int, dest='hidden_size',
                     help='the size of hidden layer')
 
+def retrieval_cl(latents_q, latents_d, temperature=0.2):
+    q = F.normalize(latents_q, dim=-1)
+    d = F.normalize(latents_d, dim=-1)
+    logits = q @ d.T / temperature  # shape: (B, B)
+    labels = torch.arange(q.size(0), device=q.device)  # diagonal as positive
+    return F.cross_entropy(logits, labels)
 
 def main():
     args = parser.parse_args()
@@ -304,29 +310,61 @@ def train(train_loader, model, criterion, optimizer, epoch, device, args):
     # switch to train mode
     model.train()
     end = time.time()
-    for i, (images, target) in enumerate(train_loader):
+    for i, batch in enumerate(train_loader):
         # measure data loading time
         data_time.update(time.time() - end)
+        if isinstance(batch, (tuple, list)) and len(batch) == 2:
+            query_embed, corpus_embed = batch
+            query_embed = query_embed.half().to(device, non_blocking=True)
+            corpus_embed = corpus_embed.half().to(device, non_blocking=True)
+            paired = True
+        else:
+            embed = batch[0] if isinstance(batch, (tuple, list)) else batch
+            embed = embed.half().to(device, non_blocking=True)
+            paired = False
         # move data to the same device as model
-        images = images.to(torch.float32)
-        images = images.to(device, non_blocking=True)
 
-        x_1, latents_pre_act_1, latents_k_1, recons_1, recons_aux_1 = model(images)
-        x_3, latents_pre_act_3, latents_k_3, recons_3, recons_aux_3 = model(images,topk = 4 * args.topk)
+        if paired:
+            # --- Query forward ---
+            _, latents_pre_q, latents_k_q, recons_q, recons_aux_q = model(query_embed)
+            _, _, _, recons_q_4k, _ = model(query_embed, topk=4 * args.topk)
 
+            # --- Corpus forward ---
+            _, latents_pre_c, latents_k_c, recons_c, recons_aux_c = model(corpus_embed)
+            _, _, _, recons_c_4k, _ = model(corpus_embed, topk=4 * args.topk)
 
-        loss_k = criterion(x_1, recons_1)
-        loss_4k = criterion(x_3, recons_3)
-        loss_auxk = normalized_mse(recons_aux_1, x_1 - recons_1.detach() + model.pre_bias.detach(),
-                                    criterion).nan_to_num(0)
+            
+            # --- Reconstruction loss ---
+            loss_k = (criterion(query_embed, recons_q) + criterion(corpus_embed, recons_c)) * 0.5
+            loss_4k = (criterion(query_embed, recons_q_4k) + criterion(corpus_embed, recons_c_4k)) * 0.5
 
-        if args.use_CL:
-            x_2, latents_pre_act_2, latents_k_2, recons_2, recons_aux_2 = model(images)
-            loss_cl = inbatch_cl(latents_k_1, latents_k_2)
+            loss_auxk_q = normalized_mse(recons_aux_q, query_embed - recons_q.detach() + model.module.pre_bias.detach(), criterion).nan_to_num(0)
+            loss_auxk_c = normalized_mse(recons_aux_c, corpus_embed - recons_c.detach() + model.module.pre_bias.detach(), criterion).nan_to_num(0)
+            loss_auxk = (loss_auxk_q + loss_auxk_c) * 0.5
+
+            if args.use_CL:
+                loss_cl = retrieval_cl(latents_k_q, latents_k_c)
+            else:
+                loss_cl = torch.tensor(0.0, device=device)
+
+        else:
+            x_1, latents_pre_1, latents_k_1, recons_1, recons_aux_1 = model(embed)
+            _, _, _, recons_4k, _ = model(embed, topk=4 * args.topk)
+
+            loss_k = criterion(x_1, recons_1)
+            loss_4k = criterion(x_1, recons_4k)
+
+            loss_auxk = normalized_mse(recons_aux_1, x_1 - recons_1.detach() + model.module.pre_bias.detach(), criterion).nan_to_num(0)
+
+            if args.use_CL:
+                _, _, latents_k_2, _, _ = model(embed)
+                loss_cl = inbatch_cl(latents_k_1, latents_k_2)
+            else:
+                loss_cl = torch.tensor(0.0, device=device)
 
         loss = loss_k + 0.125 * loss_4k + args.auxk_coef * loss_auxk + args.cl_coef * loss_cl
 
-        losses.update(loss_k.item(), images.size(0))
+        losses.update(loss_k.item(), batch[0].size(0) * 2 if paired else embed.size(0))
 
         optimizer.zero_grad()
         loss.backward()
