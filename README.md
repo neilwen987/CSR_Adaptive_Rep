@@ -294,7 +294,7 @@ python get_retrieval_embeddings.py \
 	--split None # default: all splits
 ```
 #### Train Contrastive Sparse Representation
-After getting embeddings, you can train CSR with `train_CSR_models.py`. You need to customize `--task_name`, `--pretrained_embed` and `--gpu`. 
+After getting embeddings, you can train CSR with `train_CSR_models.py`. You need to customize `--task_name`, `--pretrained_embed` and `--gpu`. **Note: you can also use the query-corpus pretrained embedding pairs for calculating contrastive loss to get better results.**
 ```sh
 python train_CSR_models.py \
         --task_name $TASK_NAME \   # the dataset you want to train CSR on.
