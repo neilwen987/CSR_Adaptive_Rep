@@ -17,6 +17,7 @@ This project is built on top of prior research and infrastructure from the Y Res
 Please refer to the Y Research repo for more details.
 
 ## &#x1F680; &#x1F680; News
+- 2025.06.06 [More ckpts](https://drive.google.com/drive/folders/1KNidBRzChAg3g4MuTO7K8Hz46HiGz0rv) are released!! &#x1F601;&#x1F601;
 - 2025.05.25 **Major Update**. We have thoroughly reorganized our repository with the following changes: 🎉🎉
   - Minor code changes on Visual Experiments, especially dataset preparation.
   - Training & Evaluation Pipeline for Text Experiments, including text classification, text clustering and text retrieval.
