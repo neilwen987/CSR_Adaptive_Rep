@@ -1,11 +1,32 @@
 #  [Beyond Matryoshka: Revisiting Sparse Coding for Adaptive Representation](http://arxiv.org/abs/2503.01776) (ICML 2025)
-By [Tiansheng Wen\*](https://neilwen987.github.io/), [Yifei Wang\*](https://yifeiwang77.com/), [Zequn Zeng](https://joeyz0z.github.io/), Zhong Peng, Yudi Su, [Xinyang Liu](https://xinyangatk.github.io/),
-[Bo Chen](https://web.xidian.edu.cn/bchen/en/index.html), Hongwei Liu, [Stefanie Jegelka](https://people.csail.mit.edu/stefje/) and [Chenyu You](https://chenyuyou.me/)
+<div align="center"style="font-family: charter; font-size: x-small;">
+	<a href="https://neilwen987.github.io/" target="_blank">Tiansheng Wen*</a><sup>1,2</sup>,</span>
+	<a href="https://yifeiwang77.com/" target="_blank">Yifei Wang*</a><sup>3</sup>,</span>
+	<a href="https://joeyz0z.github.io/" target="_blank">Zequn Zeng</a><sup>1</sup>,</span>
+	Zhong Peng<sup>1</sup>,</span>
+	Yudi Su<sup>1</sup>,</span>
+	<a href="https://xinyangatk.github.io/" target="_blank">Xinyang Liu</a><sup>1</sup>,</span>
+	<a href="https://web.xidian.edu.cn/bchen/en/index.html" target="_blank">Bo Chen</a><sup>1</sup>,</span>
+	Hongwei Liu<sup>1</sup>,</span> <br>
+	<a href="https://people.csail.mit.edu/stefje/" target="_blank">Stefanie Jegelka</a><sup>3,4</sup>,</span>
+	<a href="https://chenyuyou.me/" target="_blank">Chenyu You</a><sup>2</sup> &ensp;
+</div>
+<br>
+<div align="center">
+    <sup>1</sup>Xidian University&emsp;
+    <sup>2</sup>Stony Brook University&emsp;
+    <sup>3</sup>MIT&emsp;
+    <sup>4</sup>TU Munich&emsp;
+    <br>
+</div>
 
-<a href='https://arxiv.org/abs/2503.01776'><img alt="Static Badge" src="https://img.shields.io/badge/Paper-arXiv-red"></a>
-<a href="https://x.com/yifeiwang77/status/1897023662328611062"><img src='assets/-twitter-blue.svg'></a>
-
+<br>
+<div align='center'>
+<a href='https://arxiv.org/abs/2503.01776'><img alt="Static Badge" src="https://img.shields.io/badge/arXiv-CSR-red?logo=arxiv" height="20""></a>
+<a href="https://x.com/yifeiwang77/status/1897023662328611062"><img src='https://img.shields.io/badge/Twitter-CSR-blue?logo=x' height="20"></a>
+	
 ![Overview](./assets/overview.jpg)
+</div>
 
 In this paper, we show that *sparse coding* offers a compelling alternative for achieving adaptive representation with minimal overhead and higher fidelity. We propose **C**ontrastive **S**parse **R**epresentation, a method that sparsifies pre-trained embeddings into a high-dimensional but *selectively activated* feature space. By leveraging lightweight autoencoding and task-aware contrastive objectives, CSR preserves semantic quality while allowing flexible, cost-effective inference at different sparsity levels. Extensive experiments on image, text, and multimodal benchmarks demonstrate that CSR consistently outperforms MRL in terms of both accuracy and retrieval speed-often by large margins-while also cutting training time to a fraction of that required by MRL. Our results establish sparse coding as a powerful paradigm for adaptive representation learning in real-world applications where efficiency and fidelity are both paramount. 
 
