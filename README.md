@@ -3,6 +3,7 @@ By [Tiansheng Wen\*](https://neilwen987.github.io/), [Yifei Wang\*](https://yife
 [Bo Chen](https://web.xidian.edu.cn/bchen/en/index.html), Hongwei Liu, [Stefanie Jegelka](https://people.csail.mit.edu/stefje/) and [Chenyu You](https://chenyuyou.me/)
 
 <a href='https://arxiv.org/abs/2503.01776'><img alt="Static Badge" src="https://img.shields.io/badge/Paper-arXiv-red"></a>
+<a href="https://x.com/yifeiwang77/status/1897023662328611062"><img src='assets/-twitter-blue.svg'></a>
 
 ![Overview](./assets/overview.jpg)
 
