@@ -1,4 +1,4 @@
-#  [Beyond Matryoshka: Revisiting Sparse Coding for Adaptive Representation](http://arxiv.org/abs/2503.01776) (ICML 2025 Oral)
+#  [Beyond Matryoshka: Revisiting Sparse Coding for Adaptive Representation](http://arxiv.org/abs/2503.01776) [ICML 2025 Oral]
 <div align="center"style="font-family: charter; font-size: x-small;">
 	<a href="https://neilwen987.github.io/" target="_blank">Tiansheng Wen*</a><sup>1,2</sup>,</span>
 	<a href="https://yifeiwang77.com/" target="_blank">Yifei Wang*</a><sup>3</sup>,</span>
