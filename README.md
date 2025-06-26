@@ -22,10 +22,20 @@
 
 <br>
 <div align='center'>
-<a href='https://arxiv.org/abs/2503.01776'><img alt="Static Badge" src="https://img.shields.io/badge/arXiv-CSR-red?logo=arxiv" height="20""></a>
+<br>
+<p>
+  <a href="https://arxiv.org/abs/2503.01776">
+    <img src="https://img.shields.io/badge/💡%20Paper-ICML (oral)-red?style=flat-square" alt="Paper">
+  </a>
+  <a href="https://icml.cc/virtual/2025/oral/47166">
+    <img src="https://img.shields.io/badge/▶%20Poster%20/%20Video-ICML-blue?style=flat-square" alt="Poster & Video">
+  </a>
 <a href="https://x.com/yifeiwang77/status/1897023662328611062"><img src='https://img.shields.io/badge/Twitter-CSR-blue?logo=x' height="20"></a>
-<br>
-<br>
+  <a href="https://drive.google.com/drive/folders/1fI4ip-tcjSrmXtFANmIDTh1wERPlfySO">
+    <img src="https://img.shields.io/badge/Hugging%20Face-Model-yellow?style=flat-square&logo=huggingface" alt="Hugging Face Model">
+  </a>
+  <img src="https://img.shields.io/badge/PyTorch-2.0-EE4C2C?style=flat-square&logo=pytorch" alt="PyTorch 2.0">
+</p>
 
 ![Overview](./assets/overview.jpg)
 </div>
