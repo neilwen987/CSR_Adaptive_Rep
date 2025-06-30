@@ -31,8 +31,8 @@
     <img src="https://img.shields.io/badge/▶%20Poster%20/%20Video-ICML-blue?style=flat-square" alt="Poster & Video">
   </a>
 <a href="https://x.com/yifeiwang77/status/1897023662328611062"><img src='https://img.shields.io/badge/Twitter-CSR-blue?logo=x' height="20"></a>
-  <a href="https://drive.google.com/drive/folders/1fI4ip-tcjSrmXtFANmIDTh1wERPlfySO">
-    <img src="https://img.shields.io/badge/Hugging%20Face-Model-yellow?style=flat-square&logo=huggingface" alt="Hugging Face Model">
+  <a href="https://huggingface.co/collections/Y-Research-Group/csr-embedding-68624c05c250c3cc1fd40223">
+ <img src="https://img.shields.io/badge/Hugging%20Face-Model-yellow?style=flat-square&logo=huggingface" alt="Hugging Face Model">
   </a>
   <img src="https://img.shields.io/badge/PyTorch-2.0-EE4C2C?style=flat-square&logo=pytorch" alt="PyTorch 2.0">
 </p>
