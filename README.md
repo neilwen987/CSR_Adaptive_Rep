@@ -36,7 +36,7 @@
   <a href="https://huggingface.co/collections/Y-Research-Group/csr-embedding-68624c05c250c3cc1fd40223">
     <img src="https://img.shields.io/badge/Hugging%20Face-Model-yellow?style=flat-square&logo=huggingface" alt="Hugging Face Model">
   </a>
-  <img src="https://img.shields.io/badge/PyTorch-2.0-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch 2.0">
+  <img src="https://img.shields.io/badge/PyTorch-2.0-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch 2.1">
 </p>
 
 ![Overview](./assets/overview.jpg)
