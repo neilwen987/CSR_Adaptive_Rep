@@ -22,7 +22,7 @@
 
 <br>
 <div align='center'>
-<br>
+
 <p>
   <a href="https://arxiv.org/abs/2503.01776">
     <img src="https://img.shields.io/badge/💡%20Paper-arXiv-blue?style=flat-square&logo=arxiv&logoColor=white" alt="Paper">
@@ -39,7 +39,6 @@
   <a href="https://huggingface.co/blog/train-sparse-encoder">
     <img src="https://img.shields.io/badge/Hugging%20Face%20Blog-Sparse%20Encoder-ff69b4?style=flat-square&logo=huggingface" alt="Hugging Face Blog">
   </a>
-  <img src="https://img.shields.io/badge/PyTorch-2.1-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch 2.1">
 </p>
 
 ![Overview](./assets/overview.jpg)
