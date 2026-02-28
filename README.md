@@ -55,6 +55,7 @@ This project is built on top of prior research and infrastructure from the Y Res
 Please refer to the Y Research repo for more details.
 
 ## &#x1F680; &#x1F680; News
+- 2026.01.26 Our paper [CSRv2](https://y-research-sbu.github.io/CSRv2/) is accepted by ICLR2026, where we expand CSR to ultra sparsity! Code is available [here](https://github.com/Y-Research-SBU/CSRv2).
 - 2025.07.01 [Our models](https://huggingface.co/Y-Research-Group) can be loaded with [Sentence_Transformers](https://github.com/UKPLab/sentence-transformers) now! &#x1F601;&#x1F601;
 - 2025.06.06 [More model checkpoints](https://drive.google.com/drive/folders/1KNidBRzChAg3g4MuTO7K8Hz46HiGz0rv) are released!! &#x1F601;&#x1F601;
 - 2025.05.25 **Major Update**. We have thoroughly reorganized our repository with the following changes: 🎉🎉
